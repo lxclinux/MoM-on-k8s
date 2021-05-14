@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-provisioner
+spec:
+  selector:
+    matchLabels:
+      app: nfs-provisioner
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nfs-provisioner
+    spec:
+      serviceAccount: nfs-provisioner
+      containers:
+        - name: nfs-provisioner
+          image: registry.cn-hangzhou.aliyuncs.com/open-ali/nfs-client-provisioner:latest   
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: jim.com/nfs     #可自定义
+            - name: NFS_SERVER
+              value: 172.16.76.172    #对应NFS服务器IP地址
+            - name: NFS_PATH
+              value: /mongo/share   #对应NFS配置好的共享目录
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 172.16.76.172       #对应NFS服务器IP地址
+            path: /mongo/share      #对应NFS配置好的共享目录

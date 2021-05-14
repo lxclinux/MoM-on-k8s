@@ -1,0 +1,21 @@
+# make nfs-server 
+#
+#
+#   yum install nfs-utils -y
+#   
+#
+#   mkfs.xfs /dev/sdb
+#   mkdir /mongo/share
+#   mount /dev/sdb /mongo/share/
+#   写入/etc/fstab文件
+#
+#
+#   systemctl restart nfs-server nfs-utils
+#   systemctl enabel  nfs-server nfs-utils
+#
+#   其他机器安装
+#   yum install nfs-utils -y
+#
+#
+#  参考网址链接
+#  https://blog.csdn.net/m0_37939350/article/details/108182767?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-4.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-4.control
